@@ -16,9 +16,9 @@ function getComputerChoice() {
 
     if(val <= 3){
         guess = "rock";
-    } else if (val <= 6){
+    } else if (val > 3 && val <= 6){
         guess = "paper";
-    } else if (val <=10){
+    } else if (val > 6 && val <=9){
         guess = "scizzors";
     }
 
@@ -30,13 +30,18 @@ function getComputerChoice() {
 
 function getHumanChoice() {
     let userVal = prompt("Enter 'Rock', 'Paper', or 'Scizzors'.");
-    /* 
-    if(userVal.toLowerCase() !== 'rock' || 
-    userVal.toLowerCase() !== 'paper' || 
-    userVal.toLowerCase() !== 'scizzors') {
-        userVal = prompt("Invalid! Please enter one of the choices.");
-    }
-    */
+    
+    if(userVal.toLowerCase() === 'rock'){
+        userVal = 'rock';
+    } else if (userVal.toLowerCase() === 'paper'){
+        userVal = 'paper';
+     } else if (userVal.toLowerCase() === "scizzors"){
+        userVal = "scizzors";
+     } else {
+        console.log("Invalid entry! Please try again.");
+     }
+
+    
 
     return userVal;
 }
@@ -91,6 +96,16 @@ function playGame() {
     for(let i = 0; i < 5; i++){
         playRound(getHumanChoice(), getComputerChoice());
     }
+
+    console.log("Final score: Computer = " + computerScore + "\tUser = " + humanScore);
+    if(computerScore > humanScore){
+        console.log("Computer wins!!!");
+    } else if(humanScore > computerScore){
+        console.log("User wins!!!");
+    } else {
+        console.log("Tie!!!");
+    }
+
 }
 
 playGame();
