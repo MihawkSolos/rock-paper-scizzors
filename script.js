@@ -10,6 +10,39 @@ PLAN:
 
 */
 
+// BUTTONS
+
+const rockButton = document.querySelector('.rock');
+const paperButton = document.querySelector('.paper');
+const scizButton = document.querySelector('.scizzors');
+
+function callPlayRound(value) {
+    playRound(value, getComputerChoice());
+}
+
+rockButton.addEventListener("click",() => callPlayRound(rockButton.value))
+paperButton.addEventListener("click",() => callPlayRound(paperButton.value))
+scizButton.addEventListener("click",() => callPlayRound(scizButton.value))
+// BUTTONS
+
+// div section
+
+const results = document.querySelector('.results');
+const text = document.createElement('p');
+const score = document.createElement('p');
+
+text.textContent = '';
+results.appendChild(text);
+
+score.textContent = '';
+results.appendChild(score);
+
+
+// div section
+
+
+
+
 function getComputerChoice() {
     let val = Math.floor(Math.random() * 10);
     let guess;
@@ -27,7 +60,7 @@ function getComputerChoice() {
 
 // console.log(getComputerChoice());
 
-
+// function is currently replaced with the butons
 function getHumanChoice() {
     let userVal = prompt("Enter 'Rock', 'Paper', or 'Scizzors'.");
     
@@ -40,13 +73,14 @@ function getHumanChoice() {
      } else {
         console.log("Invalid entry! Please try again.");
      }
-
-    
-
     return userVal;
 }
 
+
+
 // console.log(getHumanChoice());
+
+
 
 let humanScore = 0;
 let computerScore = 0;
@@ -54,48 +88,55 @@ let computerScore = 0;
 function playRound (humanChoice, computerChoice){
 
     if(humanChoice === "rock" && computerChoice === "rock"){
-        console.log("Tie! No one wins.") // Tie rock
+        text.textContent = "Tie! No one wins."; // Tie rock
     } 
     else if(humanChoice === "paper" && computerChoice === "paper"){
-        console.log("Tie! No one wins.") // Tie paper
+        text.textContent = "Tie! No one wins."; // Tie paper
     } 
     else if(humanChoice === "scizzors" && computerChoice === "scizzors"){
-        console.log("Tie! No one wins.") // Tie scizzors
+        text.textContent = "Tie! No one wins."; // Tie scizzors
     } 
     else if (humanChoice === "rock" && computerChoice === "paper"){
-        console.log("Computer wins with paper!");
+        text.textContent = "Computer wins with paper!";
         computerScore++; // computer wins with paper > rock
     } 
     else if (humanChoice === "rock" && computerChoice === "scizzors"){
-        console.log("You win!");
+        text.textContent = "You win!";
         humanScore++; // user wins with rock > scizzors
     } 
     else if (humanChoice === "paper" && computerChoice === "rock"){
-        console.log("You win!");
+        text.textContent = "You win!";
         humanScore++; // user wins with paper > rock
     } 
     else if (humanChoice === "paper" && computerChoice === "scizzors"){
-        console.log("Computer wins with scizzors!");
+        text.textContent = "Computer wins with scizzors!";
         computerScore++; // computer wins with scizzors > paper
     } 
     else if (humanChoice === "scizzors" && computerChoice === "paper"){
-        console.log("You win!");
+        text.textContent = "You win!";
         humanScore++; // user wins with scizzors > paper
     } 
     else if (humanChoice === "scizzors" && computerChoice === "rock"){
-        console.log("Computer wins with rock!");
+        text.textContent = "Computer wins with rock!";
         computerScore++; // computer wins with rock > scizzors
     } 
 
+    score.textContent = "Score: Computer = " + computerScore + "\tUser = " + humanScore;
+    if(computerScore > humanScore && computerScore === 5){
+       score.textContent = "Computer wins!!!";
+    } else if(humanScore > computerScore && humanScore === 5){
+        score.textContent = "User wins!!!";
+    } 
 }
 
-
-
-
+// this function isnt being used rn
 function playGame() {
+    /*
     for(let i = 0; i < 5; i++){
         playRound(getHumanChoice(), getComputerChoice());
     }
+    */
+    playRound(getHumanChoice(), getComputerChoice());
 
     console.log("Final score: Computer = " + computerScore + "\tUser = " + humanScore);
     if(computerScore > humanScore){
@@ -108,4 +149,4 @@ function playGame() {
 
 }
 
-playGame();
+//playGame();
